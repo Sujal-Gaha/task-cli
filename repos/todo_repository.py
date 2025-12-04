@@ -2,7 +2,7 @@ import sqlite3
 from database import Database
 import datetime
 from typing import List, Optional
-from model import Todo
+from models.todo import Todo
 
 
 class TodoRepository:

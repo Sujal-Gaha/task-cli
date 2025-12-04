@@ -1,15 +1,8 @@
 import typer
 from rich.console import Console
 from rich.table import Table
-from model import Todo
-from database import (
-    get_all_todos,
-    delete_todo,
-    insert_todo,
-    complete_todo,
-    update_todo,
-    Database,
-)
+from models.todo import Todo
+from database import Database
 from repos.todo_repository import TodoRepository
 from typing import Optional
 
