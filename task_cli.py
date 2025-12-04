@@ -29,7 +29,7 @@ def delete(position: int):
 
 
 @app.command()
-def update(position: int, task: str = None, category: str = None):
+def update(position: int, task: str | None = None, category: str | None = None):
     typer.echo(f"updating {position}")
 
     update_todo(position - 1, task, category)

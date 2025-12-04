@@ -81,7 +81,7 @@ def delete_todo(position):
             change_position(pos, pos - 1, False)
 
 
-def update_todo(position: int, task: str, category: str):
+def update_todo(position: int, task: str | None, category: str | None):
     with conn:
         if task is not None and category is not None:
             c.execute(
@@ -90,7 +90,7 @@ def update_todo(position: int, task: str, category: str):
             )
         elif task is not None:
             c.execute(
-                "UPDATE todos SET task = :task, WHERE position = :position",
+                "UPDATE todos SET task = :task WHERE position = :position",
                 {"position": position, "task": task},
             )
         elif category is not None:
