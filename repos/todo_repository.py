@@ -8,13 +8,13 @@ from models.todo import Todo
 class TodoRepository:
     """Repository class for managing Todo operations"""
 
-    def __init__(self, db_connection: Database):
-        self.db = db_connection
+    def __init__(self, db_connection: Database) -> None:
+        self.db: Database = db_connection
         self.conn: sqlite3.Connection = db_connection.conn
         self.cursor: sqlite3.Cursor = db_connection.cursor
         self._create_table()
 
-    def _create_table(self):
+    def _create_table(self) -> None:
         """Create todos table if it doesn't exist"""
         self.cursor.execute(
             """
@@ -30,7 +30,7 @@ class TodoRepository:
         )
         self.conn.commit()
 
-    def create(self, todo: Todo):
+    def create(self, todo: Todo) -> None:
         """Create a new todo in the database"""
         self.cursor.execute("SELECT COUNT(*) FROM todos")
         count = self.cursor.fetchone()[0]
@@ -63,7 +63,7 @@ class TodoRepository:
 
     def _change_position(
         self, old_position: int, new_position: int, commit: bool = True
-    ):
+    ) -> None:
         """Change the position of a todo"""
         self.cursor.execute(
             "UPDATE todos SET position = :position_new WHERE position = :position_old",
@@ -73,7 +73,7 @@ class TodoRepository:
         if commit:
             self.conn.commit()
 
-    def delete(self, position: int):
+    def delete(self, position: int) -> None:
         """Delete a todo and reorder remaining todos"""
         self.cursor.execute("SELECT COUNT(*) FROM todos")
         count = self.cursor.fetchone()[0]
@@ -88,7 +88,7 @@ class TodoRepository:
 
     def update(
         self, position: int, task: Optional[str] = None, category: Optional[str] = None
-    ):
+    ) -> None:
         """Update a todo's task and/or category"""
         with self.conn:
             if task is not None and category is not None:
@@ -107,7 +107,7 @@ class TodoRepository:
                     {"position": position, "category": category},
                 )
 
-    def complete(self, position: int):
+    def complete(self, position: int) -> None:
         """Mark a todo as completed"""
         with self.conn:
             self.cursor.execute(

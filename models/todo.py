@@ -10,10 +10,10 @@ class Todo:
         date_completed=None,
         status=None,
         position=None,
-    ):
-        self.task = task
-        self.category = category
-        self.date_added = (
+    ) -> None:
+        self.task: str = task
+        self.category: str = category
+        self.date_added: str = (
             date_added
             if date_added is not None
             else datetime.datetime.now().isoformat()
