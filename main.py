@@ -94,7 +94,13 @@ def show() -> None:
 
     def get_category_color(category: str) -> str:
         """Map category to color"""
-        COLORS = {"Learn": "cyan", "Youtube": "red", "Sports": "cyan", "Study": "green"}
+        COLORS = {
+            "Learn": "cyan",
+            "Youtube": "red",
+            "Sports": "cyan",
+            "Study": "green",
+            "Task": "green",
+        }
         if category in COLORS:
             return COLORS[category]
         return "white"
